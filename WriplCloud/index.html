@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>wripl interactive cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="draft wripl interactive cloud for testing backbone">
+    <meta name="author" content="rob">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='container'>
+      <div class='hero-unit'>
+        <h1>Wripl Cloud</h1>
+        <p>git clone https://github.com/robertross/backbone-tutorials.git</p>
+      </div>
+      <div class='row'>
+        <div class='span12' id='wripl-cloud'>
+          test Loading...
+        </div>
+      </div>
+    </div>
+
+    <ul id="cloud">
+      <li><a href="/streamingmedia/a/aa071000a.htm" class="tag4">Adding Streaming Audio Files</a></li>
+      <li><a href="/html101classes/a/bl_xclass1_2a.htm" class="tag3">Basic Tags for a Web Site</a></li>
+      <li><a href="/htmleditors/a/aa121304.htm" class="tag7">Best Web Design Software</a></li>
+      <li><a href="/beginningtutorials/a/aa033103a.htm" class="tag2">Building a Web Page for the Totally Lost</a>
+      </li>
+      <li><a href="/color/a/aa072604.htm" class="tag2">Color Symbolism</a></li>
+    </ul>
+
+    <script type="text/x-handlebars-template" id="index-template">
+      <h2>There are {{ count }} interests</h2> 
+      </br></br>
+      <div class="interests"></div>
+      </br>
+    </script>
+
+    <script type="text/x-handlebars-template" id='index-form-template'>
+      <div class='control-group'>
+        <label class='control-label' for='name'>Name</label>
+        <div class='controls'>
+          <input type='text' class='input-xlarge' id='name'>
+        </div>
+      </div>
+      <div class='control-group'>
+        <label class='control-label' for='importance'>Importance (tag1, tag2..  ..tag10)</label>
+        <div class='controls'>
+          <input type='text' class='input-xlarge' id='importance' text='tag5'>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Interest</button>
+      </div>
+      </br></br>
+    </script>
+
+    <script type="text/x-handlebars-template" id="index-interest-template">
+      
+      <li class="{{ importance }}"><a href="#{{ name }}" >{{ name }}</a></li>
+      <button class='btn btn-danger'>Delete</button>
+    </script>
+    <!-- TODO:
+      * A template for an individual recipe
+          
+    -->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/backbone-localstorage.js"></script>
+    <script src="js/wripl-cloud.js"></script>
+    <script>$(function() { WriplCloud.boot($('#wripl-cloud')); });</script>
+  </body>
+</html>
