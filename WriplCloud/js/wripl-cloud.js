@@ -8,23 +8,37 @@
     return Handlebars.compile($('#'+name+'-template').html());
   };
 
+  /*
+   ********************* Model **********************
+   */
+
   WriplCloud.Interest = Backbone.Model.extend({
     name: function() { return this.get('name'); },
     importance: function() { return this.get('importance'); },
+    
   });
+
 
   WriplCloud.Interests = Backbone.Collection.extend({
     model: WriplCloud.Interest,
     localStorage: new Store("interests")
   });
 
+
+  /*
+   ********************* View **********************
+   */
+
   WriplCloud.Index = Backbone.View.extend({
 
     template: template('index'),
 
     initialize: function() {
+      
       this.interests = new WriplCloud.Interests();  
+      
       this.interests.on('all', this.render, this);
+
       this.interests.on('all', function() {
         console.log('event on interests ', arguments);
       })
@@ -61,6 +75,9 @@
     }
   });
 
+
+  // will be InterestView.js
+
   WriplCloud.Index.Interest = Backbone.View.extend({
     template: template('index-interest'),
     tagName: 'li',
@@ -80,8 +97,8 @@
     },
     name: function() { return this.model.name(); },
     importance: function() { return this.model.importance(); },
-    showDelete: function() { 
-      console.log("Show Delete on Hover!!!!!");
+    showDelete: function(event) { 
+      console.log("Show Delete on Hover!!!!!" +event);
       this.$('.btn').show();
     },
     hideDelete: function() { 
@@ -111,19 +128,22 @@
     },
     submit: function(event) {
       event.preventDefault();
-      console.log("Hey Rob! I should do things here");
       console.log(this.$('input#name').val(), this.$('input#importance').val());
-      
       this.collection.create({
         name: this.$('input#name').val(),
-        importance: this.$('input#importance').val()
+        importance: this.$('input#importance').val() || 'tag5'
       });
     }
+
+
   });
 
   /*
-   * Here's the routher and the boot function
-   * TODO: understand this better.
+   ********************* Controller **********************
+   * 
+   *
+   * including the router and boot function
+   *
    */
 
   WriplCloud.Router = Backbone.Router.extend({
