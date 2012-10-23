@@ -27,9 +27,14 @@
     </div>
 
     <script type="text/x-handlebars-template" id="index-template">
-      <h2>There are {{ count }} interests</h2> 
+      <h2>There are {{ count }} interests 
+      
+      </h2> 
+      <button id="clear" class="btn btn-secondary">Delete All</button>
       </br></br>
+
       <div class="interests"></div>
+
       </br>
     </script>
 
@@ -44,17 +49,18 @@
       <div class='control-group'>
         <label class='control-label' for='importance'>Importance (tag1, tag2..  ..tag10)</label>
         <div class='controls'>
-          <input type='text' class='input-xlarge' id='importance' placeholder='tag5'>
+          <input type='text' class='input-xlarge' id='importance' placeholder='{{importancePlaceholder}}'>
         </div>
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Add Interest</button>
+        <button type="submit" id="submit" class="btn btn-primary">Add Interest</button>
+        
       </div>
+
       </br></br>
     </script>
 
     <script type="text/x-handlebars-template" id="index-interest-template">
-      
       <li class="{{ importance }}">
         <a href="#{{ name }}" >{{ name }}</a>
       </li>
@@ -66,12 +72,14 @@
     -->
 
     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui-1.9.0.custom.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/backbone-localstorage.js"></script>
     <script src="js/wripl-cloud.js"></script>
+
     <script>$(function() { WriplCloud.boot($('#wripl-cloud')); });</script>
   </body>
 </html>

@@ -9,7 +9,7 @@
   };
 
   /*
-   ********************* Model **********************
+   *******************************************
    */
 
   WriplCloud.Interest = Backbone.Model.extend({
@@ -22,34 +22,31 @@
   WriplCloud.Interests = Backbone.Collection.extend({
     model: WriplCloud.Interest,
     localStorage: new Store("interests")
+
   });
 
 
   /*
-   ********************* View **********************
+   *******************************************
    */
 
   WriplCloud.Index = Backbone.View.extend({
 
     template: template('index'),
-
+    events: {
+      "click button#clear" : "clearInterests"
+    },
     initialize: function() {
       
       this.interests = new WriplCloud.Interests();  
-      
       this.interests.on('all', this.render, this);
-
       this.interests.on('all', function() {
         console.log('event on interests ', arguments);
       })
       this.interests.fetch();
     },
-
     render: function() {
       this.$el.html(this.template(this));
-      
-      // The 2 following variables are NEW Views made ON the BreakfastRoll.index View.
-      // One is the form, the other the lists of recipes.
       var form = new WriplCloud.Index.Form({collection: this.interests}); 
       var interestList = new WriplCloud.Index.Interests({collection: this.interests});
       this.$('.interests').append(interestList.render().el);
@@ -60,12 +57,19 @@
 
     count: function() {
       return this.interests.length;
+    },
+    clearInterests: function() {
+      this.interests.reset();
+      localStorage.clear();
+      console.log("delete the interests");
     }
+
   });
 
   WriplCloud.Index.Interests = Backbone.View.extend({
     tagName: 'ul',
     id: 'cloud',
+    
     render: function() {
       this.collection.each(function(interest){
         var view = new WriplCloud.Index.Interest({model: interest});
@@ -73,10 +77,9 @@
       }, this);
       return this
     }
+
   });
 
-
-  // will be InterestView.js
 
   WriplCloud.Index.Interest = Backbone.View.extend({
     template: template('index-interest'),
@@ -87,18 +90,14 @@
       "mouseleave" : "hideDelete"
     },
     render: function() {
-       //this.$el.text(this.name());      // RR: This was used before started using a handlebars template
-       this.$el.empty();
-       this.$el.html(this.template(this));
-       this.$('.btn').hide();
-       
-
+      this.$el.empty();
+      this.$el.html(this.template(this));
+      this.$('.btn').hide();
       return this;
     },
     name: function() { return this.model.name(); },
     importance: function() { return this.model.importance(); },
     showDelete: function(event) { 
-      console.log("Show Delete on Hover!!!!!" +event);
       this.$('.btn').show();
     },
     hideDelete: function() { 
@@ -106,7 +105,8 @@
     },
     delete: function() { 
       this.model.destroy();
-    }
+    },
+
     
   });
 
@@ -119,7 +119,7 @@
       "submit": "submit"
     },
     initialize: function(options) {
-
+      this.importancePlaceholder = "tag5";
     },
     render: function() {
       // this.$el.text('foo');
@@ -128,21 +128,30 @@
     },
     submit: function(event) {
       event.preventDefault();
-      console.log(this.$('input#name').val(), this.$('input#importance').val());
-      this.collection.create({
-        name: this.$('input#name').val(),
-        importance: this.$('input#importance').val() || 'tag5'
-      });
+      
+      if (this.$('input#name').val()){
+        console.log(this.$('input#name').val(), this.$('input#importance').val());
+        this.collection.create({
+          name: this.$('input#name').val(),
+          importance: this.$('input#importance').val() || this.importancePlaceholder
+        });
+        
+      } else {
+        this.shakeit();
+      }
+    },
+    shakeit: function () {
+      $("input#name").effect('shake', {times: 2, distance: 5}, 300);
+    },
+    importancePlaceholder: function() {
+      return this.importancePlaceholder;
     }
 
 
   });
 
   /*
-   ********************* Controller **********************
-   * 
-   *
-   * including the router and boot function
+   *******************************************
    *
    */
 
