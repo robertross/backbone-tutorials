@@ -1,7 +1,7 @@
-define(["backbone", "AppView"], function(Backbone, AppView) {
+define(["backbone", "scripts/view/appView"], function(Backbone, AppView) {
 
   var WriplCloud = {};                    // defining a namespace
-  //window.WriplCloud = WriplCloud;         // exporting the namespace up to the window
+  window.WriplCloud = WriplCloud;         // exporting the namespace up to the window
 
   var view;
 
@@ -26,6 +26,7 @@ define(["backbone", "AppView"], function(Backbone, AppView) {
   WriplCloud.boot = function(container) {
     console.log('WriplCloud booting...');
     container = $(container);
+    console.log(container);
     var router = new WriplCloud.Router({el: container})
     Backbone.history.start();
   }

@@ -1,7 +1,7 @@
 define([
   "underscore", 
   "backbone",
-  "text!scripts/Templates/index-interest.html"
+  "text!scripts/templates/index-interest.html"
   ], 
 
   function( _, Backbone, Template){
@@ -24,10 +24,10 @@ define([
       name: function() { return this.model.name(); },
       importance: function() { return this.model.importance(); },
       showDelete: function(event) { 
-        this.$('.btn').show();
+        //this.$('.btn').show();
       },
       hideDelete: function() { 
-        this.$('.btn').hide();
+        //this.$('.btn').hide();
       },
       delete: function() { 
         this.model.destroy();

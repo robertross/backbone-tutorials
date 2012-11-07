@@ -4,8 +4,6 @@ define(["backbone"], function(Backbone) {
       
       name: function() { return this.get('name'); },
       importance: function() { return this.get('importance'); },
-
-    
   });
 
   return InterestModel;

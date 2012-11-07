@@ -1,11 +1,11 @@
 define([
   "underscore", 
   "backbone",
-  "scripts/model/Interest",
-  "scripts/collection/Interests", 
-  "scripts/view/InterestForm",
-  "scripts/view/Interests", 
-  "text!scripts/Templates/index.html"], 
+  "scripts/model/interest",
+  "scripts/collection/interests", 
+  "scripts/view/interestForm",
+  "scripts/view/interests", 
+  "text!scripts/templates/index.html"], 
 
   function( _, Backbone, InterestModel, InterestsCollection, InterestFormView, InterestsView, Template){
     
@@ -19,10 +19,13 @@ define([
         
         initialize: function() {
           this.interests = new InterestsCollection();
+
           this.interests.on('all', this.render, this);
+
           this.interests.on('add remove', function() {
             console.log('event on interests ', arguments, event);
           })
+
           this.interests.fetch();
         },
         

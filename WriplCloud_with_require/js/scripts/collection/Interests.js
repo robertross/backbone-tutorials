@@ -1,10 +1,10 @@
-define(["scripts/model/Interest"], function(InterestModel) {
+define(["scripts/model/interest","backbonelocalStorage"], function(InterestModel, localStorage) {
 
     var InterestsCollection = Backbone.Collection.extend({
 
         model: InterestModel,
     	localStorage: new Store("interests"),
-    	url :'http://wriplcloud.rob/'
+    	url :'index'
     });
 
     return InterestsCollection;

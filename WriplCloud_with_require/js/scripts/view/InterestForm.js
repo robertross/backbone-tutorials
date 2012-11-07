@@ -1,7 +1,7 @@
 define([
   "underscore", 
   "backbone",
-  "text!scripts/Templates/index-form.html"], 
+  "text!scripts/templates/index-form.html"], 
 
   function( _, Backbone, Template){
        
@@ -24,7 +24,6 @@ define([
         event.preventDefault();
         
         if (this.$('input#name').val()){
-          console.log(this.$('input#name').val(), this.$('input#importance').val());
           this.collection.create({
             name: this.$('input#name').val(),
             importance: this.$('input#importance').val() || this.importancePlaceholder
