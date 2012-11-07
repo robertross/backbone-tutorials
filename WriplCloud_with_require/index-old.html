@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>wripl interactive cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="draft wripl interactive cloud for testing backbone">
+    <meta name="author" content="rob">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='container'>
+      <div class='hero-unit'>
+        <h1>Wripl Cloud</h1>
+        <p>git clone https://github.com/robertross/backbone-tutorials.git</p>
+      </div>
+      <div class='row'>
+        <div class='span12' id='wripl-cloud'>
+          test Loading...
+        </div>
+      </div>
+    </div>
+
+    <script type="text/x-handlebars-template" id="index-template">
+      <h2>There are {{ count }} interests 
+      
+      </h2> 
+      <button id="clear" class="btn btn-secondary">Delete All</button>
+      </br></br>
+
+      <div class="interests"></div>
+
+      </br>
+    </script>
+
+    <script type="text/x-handlebars-template" id='index-form-template'>
+      <div class='control-group'>
+        <label class='control-label' for='name'>Name</label>
+        <div class='controls'>
+
+          <input type='text' class='input-xlarge' id='name' autofocus>
+        </div>
+      </div>
+      <div class='control-group'>
+        <label class='control-label' for='importance'>Importance (tag1, tag2..  ..tag10)</label>
+        <div class='controls'>
+          <input type='text' class='input-xlarge' id='importance' placeholder='{{importancePlaceholder}}'>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" id="submit" class="btn btn-primary">Add Interest</button>
+        
+      </div>
+
+      </br></br>
+    </script>
+
+    <script type="text/x-handlebars-template" id="index-interest-template">
+      <li class="{{ importance }}">
+        <a href="#{{ name }}" >{{ name }}</a>
+      </li>
+      <button class='btn btn-danger'>Delete</button>
+    </script>
+    <!-- TODO:
+      * A template for an individual recipe
+          
+    -->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui-1.9.0.custom.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/backbone-localstorage.js"></script>
+    <script src="js/wripl-cloud.js"></script>
+
+    <script>$(function() { WriplCloud.boot($('#wripl-cloud')); });</script>
+  </body>
+</html>
